@@ -5,6 +5,8 @@
  */
 package HR;
 
+import Classes.leave;
+
 /**
  *
  * @author Shanika
@@ -14,6 +16,9 @@ public class AddLeave extends javax.swing.JInternalFrame {
     /**
      * Creates new form AddLeave
      */
+    
+    leave l = new leave();
+    
     public AddLeave() {
         initComponents();
     }
@@ -28,7 +33,7 @@ public class AddLeave extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        eid = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -52,7 +57,7 @@ public class AddLeave extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel1.setText("Employee ID :");
 
-        jTextField1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        eid.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel2.setText("Start Date :");
@@ -103,6 +108,11 @@ public class AddLeave extends javax.swing.JInternalFrame {
         jButton2.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Plus_Math_26px.png"))); // NOI18N
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,7 +144,7 @@ public class AddLeave extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(eid, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(100, 100, 100)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -159,7 +169,7 @@ public class AddLeave extends javax.swing.JInternalFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jCheckBox1)
                     .addComponent(jCheckBox2))
@@ -198,8 +208,17 @@ public class AddLeave extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        l.empID = eid.getText();
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField eid;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
@@ -213,7 +232,6 @@ public class AddLeave extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
