@@ -12,11 +12,19 @@ package Classes;
 public class User {
     
     public String username;
-    protected String Password;
+    public String Password;
     public int priv_no;
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public int getPriv_no() {
+        return priv_no;
     }
 
     public void setUsername(String username) {
@@ -33,4 +41,9 @@ public class User {
         
         
     } 
+    
+    //public boolean AuthUsers(String user, String pass){
+        
+        //String q = "SELECT (username, password) FROM user WHERE usename=user AND passowrd=pass";
+    //}
 }

@@ -194,7 +194,17 @@ public class AddCase extends javax.swing.JInternalFrame {
         c1.dep = edep.getText();
         c1.status = estat.getSelectedItem().toString();
         
-        String q = "INSERT INTO case (case_name,empID,emp_name,description,createdby,createdon,dep,status) VALUES ('"+ c1.casename +"', '"+ +"')";
+        String q = "INSERT INTO case (case_name,empID,emp_name,description,createdby,createdon,dep,status) VALUES ('"+ c1.casename +"', '"+ c1.empID +"', '"+ c1.name +"', '"+ c1.desc +"', '"+ c1.createdby +"', '"+ c1.createdon +"','"+ c1.dep +"', '"+ c1.status +"')";
+        
+        try {
+            pst = conn.prepareStatement(q);
+            pst.execute();
+            
+        } catch (Exception ex) {
+            
+            System.out.println("Error when adding to database! Please check connectivity.");
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

@@ -5,7 +5,10 @@
  */
 package HR;
 
+import Classes.dbConnect;
 import Classes.leave;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -13,14 +16,15 @@ import Classes.leave;
  */
 public class AddLeave extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AddLeave
-     */
+    Connection conn = null;
+    PreparedStatement pst = null;
     
     leave l = new leave();
     
     public AddLeave() {
         initComponents();
+        
+        conn = dbConnect.connect();
     }
 
     /**
@@ -35,18 +39,18 @@ public class AddLeave extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         eid = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        sday = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        eday = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        ltype = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        lwork = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        lreason = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        ldur = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -62,39 +66,39 @@ public class AddLeave extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel2.setText("Start Date :");
 
-        jTextField2.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        sday.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel3.setText("End Date :");
 
-        jTextField3.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        eday.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel4.setText("Type :");
 
-        jTextField4.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        ltype.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        ltype.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                ltypeActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel5.setText("WorkPlace :");
 
-        jTextField5.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        lwork.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel6.setText("Reason :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        lreason.setColumns(20);
+        lreason.setRows(5);
+        jScrollPane1.setViewportView(lreason);
 
         jLabel7.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel7.setText("Duration :");
 
-        jTextField6.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        ldur.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel8.setText("Approvement : ");
@@ -136,11 +140,11 @@ public class AddLeave extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(eday, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(sday, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
@@ -154,11 +158,11 @@ public class AddLeave extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(96, 96, 96)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lwork, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ltype, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ldur, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                                         .addComponent(jButton2)))))
                         .addGap(75, 75, 75))))
@@ -176,19 +180,19 @@ public class AddLeave extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ltype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -196,7 +200,7 @@ public class AddLeave extends javax.swing.JInternalFrame {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ldur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -204,20 +208,36 @@ public class AddLeave extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void ltypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ltypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_ltypeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
         l.empID = eid.getText();
+        l.sdate = sday.getText();
+        l.edate = eday.getText();
+        l.type = ltype.getText();
+        l.workplace = lwork.getText();
+        l.reason = lreason.getText();
+        l.duration = Integer.parseInt(ldur.getText());
         
-        
+        String q = "INSERT INTO leave (start_date, end_date, type, workplace, reason, duration, emp_id) VALUES ('"+ l.sdate +"', '"+ l.edate +"', '"+ l.type +"','"+ l.workplace +"', '"+ l.reason +"', '"+ l.duration +"','"+ l.empID +"')";       
+                
+        try {
+            pst = conn.prepareStatement(q);
+            pst.execute();
+            
+        } catch (Exception ex) {
+            
+            System.out.println("Error when adding to database! Please check connectivity.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField eday;
     private javax.swing.JTextField eid;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
@@ -231,11 +251,10 @@ public class AddLeave extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField ldur;
+    private javax.swing.JTextArea lreason;
+    private javax.swing.JTextField ltype;
+    private javax.swing.JTextField lwork;
+    private javax.swing.JTextField sday;
     // End of variables declaration//GEN-END:variables
 }

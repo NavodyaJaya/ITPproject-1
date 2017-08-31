@@ -5,6 +5,7 @@
  */
 package itp;
 
+import Classes.User;
 import Classes.dbConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,7 @@ public class MainLogin extends javax.swing.JFrame {
     Connection conn=null;
     PreparedStatement pst=null;
     
+    User u = new User();
     
     public MainLogin() {
         initComponents();
@@ -185,7 +187,12 @@ public class MainLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        u.username = u.getUsername();
+        u.priv_no = u.getPriv_no();
+        u.Password = u.getPassword();
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -18,6 +18,7 @@ public class leave {
    public String reason;
    public boolean appr;
    public String empID;
+   public int duration;
 
     public int getLeaveID() {
         return leaveID;
