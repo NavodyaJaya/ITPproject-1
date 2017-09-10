@@ -5,6 +5,7 @@
  */
 package HR;
 
+import Classes.HRmanager;
 import Classes.dbConnect;
 import Classes.discase;
 import java.sql.Connection;
@@ -16,16 +17,16 @@ import java.sql.PreparedStatement;
  */
 public class AddCase extends javax.swing.JInternalFrame {
 
-    Connection conn=null;
-    PreparedStatement pst=null;
-    
+    //Creates a discase object
     discase c1 = new discase();
+    
+    //Creates a HRmanager object
+    HRmanager h = new HRmanager();
     
     
     public AddCase() {
         initComponents();
         
-        conn = dbConnect.connect();
     }
 
     /**
@@ -194,16 +195,7 @@ public class AddCase extends javax.swing.JInternalFrame {
         c1.dep = edep.getText();
         c1.status = estat.getSelectedItem().toString();
         
-        String q = "INSERT INTO case (case_name,empID,emp_name,description,createdby,createdon,dep,status) VALUES ('"+ c1.casename +"', '"+ c1.empID +"', '"+ c1.name +"', '"+ c1.desc +"', '"+ c1.createdby +"', '"+ c1.createdon +"','"+ c1.dep +"', '"+ c1.status +"')";
-        
-        try {
-            pst = conn.prepareStatement(q);
-            pst.execute();
-            
-        } catch (Exception ex) {
-            
-            System.out.println("Error when adding to database! Please check connectivity.");
-        }
+       h.addcase(c1.empID,c1.casename,c1.name,c1.desc,c1.createdby,c1.createdon,c1.dep,c1.status);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

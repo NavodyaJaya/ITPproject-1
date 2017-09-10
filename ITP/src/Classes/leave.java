@@ -16,7 +16,7 @@ public class leave {
    public String type;
    public String workplace;
    public String reason;
-   public boolean appr;
+   public String appr;
    public String empID;
    public int duration;
 

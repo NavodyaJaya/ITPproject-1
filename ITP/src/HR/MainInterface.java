@@ -265,7 +265,7 @@ public class MainInterface extends javax.swing.JFrame {
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1341, Short.MAX_VALUE)
+            .addGap(0, 1321, Short.MAX_VALUE)
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +339,7 @@ public class MainInterface extends javax.swing.JFrame {
         jDesktopPane3.setLayout(jDesktopPane3Layout);
         jDesktopPane3Layout.setHorizontalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1339, Short.MAX_VALUE)
+            .addGap(0, 1319, Short.MAX_VALUE)
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +406,7 @@ public class MainInterface extends javax.swing.JFrame {
         jDesktopPane4.setLayout(jDesktopPane4Layout);
         jDesktopPane4Layout.setHorizontalGroup(
             jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1339, Short.MAX_VALUE)
+            .addGap(0, 1319, Short.MAX_VALUE)
         );
         jDesktopPane4Layout.setVerticalGroup(
             jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

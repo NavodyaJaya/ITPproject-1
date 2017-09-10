@@ -5,17 +5,52 @@
  */
 package HR;
 
+import Classes.HRmanager;
+import Classes.dbConnect;
+import Classes.leave;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import net.proteanit.sql.DbUtils;
+
+
 /**
  *
  * @author Shanika
  */
 public class DeleteLeave extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form DeleteLeave
-     */
+   Connection conn=null;
+    PreparedStatement pst=null;
+    ResultSet rs = null;
+    
+    //Creates a new leave object
+    leave l = new leave();
+    
+    //Creates a new hrManager object
+    HRmanager h = new HRmanager();
+    
+    
     public DeleteLeave() {
         initComponents();
+        
+        conn = dbConnect.connect();
+        
+        tableload();
+    }
+    
+    public void tableload(){
+    
+        try{
+            String sql = "SELECT * FROM leave";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(Exception e){
+        
+        }
     }
 
     /**

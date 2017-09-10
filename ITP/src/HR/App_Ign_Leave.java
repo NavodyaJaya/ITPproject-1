@@ -5,19 +5,54 @@
  */
 package HR;
 
+import Classes.HRmanager;
+import Classes.dbConnect;
+import Classes.leave;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Shanika
  */
 public class App_Ign_Leave extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form App_Ign_Leave
-     */
+    
+    Connection conn=null;
+    PreparedStatement pst=null;
+    ResultSet rs = null;
+    
+    //Creates a new leave object
+    leave l = new leave();
+    
+    //Creates a new hrManager object
+    HRmanager h = new HRmanager();
+    
+    
     public App_Ign_Leave() {
         initComponents();
+        
+        conn = dbConnect.connect();
+        
+        tableload();
     }
-
+    
+    public void tableload(){
+    
+        try{
+            String sql = "SELECT * FROM leave";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(Exception e){
+        
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,10 +67,10 @@ public class App_Ign_Leave extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        ybox = new javax.swing.JCheckBox();
+        nbox = new javax.swing.JCheckBox();
+        lid = new javax.swing.JLabel();
+        eid = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setClosable(true);
@@ -52,6 +87,11 @@ public class App_Ign_Leave extends javax.swing.JInternalFrame {
                 "Leave ID", "Employee ID", "Start Date", "End Date", "Type", "Workplace", "Reason", "Duration", "Approvement"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
@@ -63,21 +103,26 @@ public class App_Ign_Leave extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel8.setText("Approvement : ");
 
-        jCheckBox1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        jCheckBox1.setText("Yes");
+        ybox.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        ybox.setText("Yes");
 
-        jCheckBox2.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        jCheckBox2.setText("No");
+        nbox.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        nbox.setText("No");
 
-        jLabel3.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        jLabel3.setText("Null");
+        lid.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        lid.setText("Null");
 
-        jLabel4.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        jLabel4.setText("Null");
+        eid.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        eid.setText("Null");
 
         jButton1.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Save_26px.png"))); // NOI18N
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,52 +133,51 @@ public class App_Ign_Leave extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel4)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
-                        .addGap(10, 10, 10)
-                        .addComponent(jCheckBox2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(lid))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(eid)))
+                        .addContainerGap(824, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ybox)
+                                .addGap(10, 10, 10)
+                                .addComponent(nbox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                    .addComponent(lid))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(eid))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))
+                            .addComponent(ybox)
+                            .addComponent(nbox))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29))))
         );
@@ -141,17 +185,48 @@ public class App_Ign_Leave extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        
+        int r = jTable1.getSelectedRow();
+        
+        l.empID = jTable1.getValueAt(r, 1).toString();
+        l.leaveID = (int) jTable1.getValueAt(r, 0);
+        
+        
+        eid.setText(l.empID);
+        lid.setText(String.valueOf(l.leaveID));
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        
+        int x =  JOptionPane.showConfirmDialog(null,"Do you really want to approve?");
+       
+       if(x==0){
+        l.empID = eid.getText();
+        l.leaveID = Integer.parseInt(lid.getText());
+        if(ybox.isSelected()==true){
+            l.appr="Yes";
+        }
+        else
+            l.appr="No";
+        
+        h.approveleave(l.empID,l.leaveID,l.appr);
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel eid;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lid;
+    private javax.swing.JCheckBox nbox;
+    private javax.swing.JCheckBox ybox;
     // End of variables declaration//GEN-END:variables
 }

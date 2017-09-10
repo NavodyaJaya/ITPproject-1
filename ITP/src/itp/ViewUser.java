@@ -5,19 +5,50 @@
  */
 package itp;
 
+import Classes.User;
+import Classes.dbConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Shanika
  */
 public class ViewUser extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ViewUser
-     */
+    
+    //Creates a user object
+    User u = new User();
+    
+    //Connect to DB
+    Connection conn=null;
+    PreparedStatement pst=null;
+    ResultSet rs = null;
+    
+    
     public ViewUser() {
         initComponents();
+        
+        conn = dbConnect.connect();
+        
+        tableload();
     }
-
+    
+    public void tableload(){
+    
+        try{
+            String sql = "SELECT (username,privilage,emp_id) FROM user";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(Exception e){
+        
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,13 +66,13 @@ public class ViewUser extends javax.swing.JInternalFrame {
         jTable1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Employee ID", "Username", "Password", "Privilege No"
+                "Employee ID", "Username", "Privilege No"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

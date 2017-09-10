@@ -5,6 +5,9 @@
  */
 package itp;
 
+import Classes.Admin;
+import Classes.User;
+
 /**
  *
  * @author Shanika
@@ -14,6 +17,11 @@ public class AddUser extends javax.swing.JInternalFrame {
     /**
      * Creates new form AddUser
      */
+    
+    User u = new User();
+    Admin a = new Admin();
+    
+    
     public AddUser() {
         initComponents();
     }
@@ -30,12 +38,12 @@ public class AddUser extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        pwd = new javax.swing.JTextField();
+        uname = new javax.swing.JTextField();
+        pno = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        eid = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -48,21 +56,26 @@ public class AddUser extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel3.setText("Privilege No. :");
 
-        jTextField1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        pwd.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        uname.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
-        jComboBox1.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---Select a Number---", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        pno.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        pno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---Select a Number---", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         jButton2.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Plus_Math_26px.png"))); // NOI18N
         jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
         jLabel4.setText("Employee ID :");
 
-        jTextField3.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
+        eid.setFont(new java.awt.Font("Georgia", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,19 +87,19 @@ public class AddUser extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(32, 32, 32)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))))
+                            .addComponent(eid)
+                            .addComponent(uname, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))))
                 .addContainerGap(150, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -99,19 +112,19 @@ public class AddUser extends javax.swing.JInternalFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(38, 38, 38))
@@ -120,16 +133,29 @@ public class AddUser extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        u.username = uname.getText();
+        u.Password = pwd.getText();
+        u.priv_no = Integer.parseInt(pno.getSelectedItem().toString());
+        u.empId = eid.getText();
+        
+        a.adduser(u.empId,u.username,u.Password,u.priv_no);
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField eid;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JComboBox pno;
+    private javax.swing.JTextField pwd;
+    private javax.swing.JTextField uname;
     // End of variables declaration//GEN-END:variables
 }

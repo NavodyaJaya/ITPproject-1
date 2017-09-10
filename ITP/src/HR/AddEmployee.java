@@ -6,6 +6,7 @@
 package HR;
 
 import Classes.Employee;
+import Classes.HRmanager;
 import Classes.dbConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,20 +20,15 @@ import java.util.logging.Logger;
  */
 public class AddEmployee extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AddEmployee
-     */
-    
-    Connection conn=null;
-    PreparedStatement pst=null;
-    
+    //Creates a new employee object
     Employee e = new Employee();
     
+    //Creates a new HRmanager object
+    HRmanager h = new HRmanager();
     
     public AddEmployee() {
         initComponents();
         
-        conn = dbConnect.connect();
     }
 
     /**
@@ -63,6 +59,7 @@ public class AddEmployee extends javax.swing.JInternalFrame {
         ephone = new javax.swing.JTextField();
         edep = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -105,6 +102,14 @@ public class AddEmployee extends javax.swing.JInternalFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -157,6 +162,8 @@ public class AddEmployee extends javax.swing.JInternalFrame {
                                 .addComponent(ephone))))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(106, 106, 106))
         );
@@ -201,16 +208,15 @@ public class AddEmployee extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(ephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(eNIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(eNIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,17 +232,23 @@ public class AddEmployee extends javax.swing.JInternalFrame {
         e.dep = edep.getSelectedItem().toString();
         e.address = eadd.getText();
         e.phone = ephone.getText();
+       
+        //Calls the addemp function in HRmanager class
+        h.addemp(e.Empid,e.fname,e.lname,e.designation,e.NIC,e.dep,e.address,e.phone);
         
-        String sq = "INSERT INTO employee VALUES ('"+ e.Empid +"', '"+ e.fname +"', '"+ e.lname +"', '"+ e.designation +"', '"+ e.NIC +"', '"+ e.dep +"', '"+ e.address +"', '"+ e.phone +"')";
-        
-        try {
-            pst = conn.prepareStatement(sq);
-            pst.execute();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        eid.setText("");
+        efname.setText("");
+        elname.setText("");
+        edesig.setText("");
+        eNIC.setText("");
+        edep.setSelectedIndex(0);
+        eadd.setText("");
+        ephone.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -249,6 +261,7 @@ public class AddEmployee extends javax.swing.JInternalFrame {
     private javax.swing.JTextField elname;
     private javax.swing.JTextField ephone;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

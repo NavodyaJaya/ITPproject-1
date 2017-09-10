@@ -5,19 +5,44 @@
  */
 package HR;
 
+import Classes.dbConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author Shanika
  */
 public class ViewLeave extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ViewLeave
-     */
+     Connection conn=null;
+    PreparedStatement pst=null;
+    ResultSet rs = null;
+    
     public ViewLeave() {
         initComponents();
+        
+        conn=dbConnect.connect();
+        
+        tableload();
     }
-
+    
+     
+    public void tableload(){
+    
+        try{
+            String sql = "SELECT * FROM leave";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(Exception e){
+        
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
